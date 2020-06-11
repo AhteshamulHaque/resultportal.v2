@@ -1,6 +1,6 @@
 # for testing purpose
 import urllib.parse
-import requests, re, os, json, traceback
+import requests, re, os, json, traceback, time
 from yaspin import yaspin
 from colorama import init, Fore, Back, Style
 from string import Template
@@ -21,25 +21,25 @@ class ImageDownloaderUploader:
       init(autoreset=True)
 
       # variable text
-      placeholder_text = Template(Fore.YELLOW+Style.BRIGHT+Back.BLACK+"$text |Progress: $progress%|")
+      placeholder_text = Template(Style.BRIGHT+"$text |Progress: $progress%|")
       
       # download text
-      download_text = Template("Downloading image with student_id=$img_id")
+      download_text = "Downloading Images"
       
       # upload text
-      upload_text = Template("Uploading image with student_id=$img_id")
+      upload_text = "Uploading Images"
       
       # file contained id of failed downloads
-      fp = open('images.failed.log', 'a')
+      fp = open('logs/images.failed.log', 'a')
 
       with yaspin(color="cyan") as sp:
          
          for index, img_info in enumerate(image_list):
             
             if op_type == 'upload':
-               text = upload_text.substitute(img_id=img_info)
+               text = upload_text
             elif op_type == 'download':
-               text=download_text.substitute(img_id=img_info)
+               text = download_text
             
             progress = "{:.1f}".format( (index/ len(image_list)) * 100)
             
@@ -48,18 +48,18 @@ class ImageDownloaderUploader:
             try:
                
                if op_type == 'upload':
-                  self.upload_image(img_info, url) # img_info is here filename or filepath
+                  self.upload_image(img_info, url) # img_info is either filename or filepath
                   
                elif op_type == 'download':   
                   # download image
-                  self.download_image( str(img_info), url) # imag_info is here an id
+                  self.download_image( str(img_info), url) # image_info is an id
                
                # log the download success
-               sp.write(Fore.GREEN+Style.BRIGHT+"✔ "+Style.RESET_ALL+"student_id={img_info}".format(img_info=img_info))
+               sp.write(Fore.GREEN+"[ SUCCESS ] "+Style.RESET_ALL+"STUDENT ID --- {img_info}".format(img_info=img_info))
                
-            except Exception:
+            except Exception as error:
                # log the error on stdout
-               sp.write(Fore.RED+Style.BRIGHT+"✕ student_id={img_info} ".format(img_info=img_info)+Fore.RED+"FAILED!")
+               sp.write(Fore.RED+f"[ FAILED - {error.__class__.__name__} ] "+Style.RESET_ALL+"STUDENT ID --- {img_info}".format(img_info=img_info))
                # log the error in a file in json format
                
                if op_type == 'upload':
@@ -82,7 +82,9 @@ class ImageDownloaderUploader:
    def download_image(self, img_id, url):
       # resp = requests.get(url.format(str(img_id)+'.jpg'))
       
-      # for testing purpose   
+      # for testing purpose 
+      time.sleep(1)
+        
       with requests.get( urllib.parse.urljoin(url, img_id+'.jpg'), stream=True ) as resp:
          resp.raise_for_status()
          
@@ -90,7 +92,6 @@ class ImageDownloaderUploader:
          # EXPECTING ONLY `JPEG` AND `PNG` FILE
          img_ext = re.match(r'image/([a-z]+)', resp.headers.get('content-type', 'image/jpeg')).group(1)
          
-         #TODO: add progress bar download support
          if not os.path.exists( self.image_dir ):
             os.makedirs( self.image_dir )
             

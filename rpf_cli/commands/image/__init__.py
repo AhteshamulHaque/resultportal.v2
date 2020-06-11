@@ -3,10 +3,11 @@ import os, time, json
 
 def register_image_parser(subparsers):
    image_parser = subparsers.add_parser('image', help='Used to download and upload images')
-   # this argument gets the link of the image for the specified roll from the server
+   
+   # this argument gets the link of the image for the specified roll from the server ( not the thumbnail link )
    image_parser.add_argument('--roll', metavar='ROLL', help='gets the image of the specified roll')
    
-   image_subparsers = image_parser.add_subparsers(dest='imgcmd', help='image sub-commands', required=True)
+   image_subparsers = image_parser.add_subparsers(dest='imgcmd', help='image sub-commands')
    
    # image download subparser
    image_download_subparser = image_subparsers.add_parser('download', help='scrape images from a url')
@@ -16,16 +17,17 @@ def register_image_parser(subparsers):
    image_download_subparser_group1 = image_download_subparser.add_mutually_exclusive_group(required=True)
    image_download_subparser_group1.add_argument('-g', '--get', metavar='[id]', help='gets the image named by specified id')
    image_download_subparser_group1.add_argument('-r', '--range', metavar='[start-end]', help='download and save image in range[start-end]')
-   image_download_subparser_group1.add_argument('-d', '--download-from-log-file', help='download images that are found in log file')
+   image_download_subparser_group1.add_argument('-d', '--download-from-log-file', action='store_true', help='download images that are found in log file')
+   
    # image upload subparser
    image_upload_subparser = image_subparsers.add_parser('upload', help='upload images to servers')
    image_upload_subparser.add_argument('url', help='http url to save the image')
    
    # mutually exclusive argument for upload subparser
    image_upload_subparser_group2 = image_upload_subparser.add_mutually_exclusive_group(required=True)   
-   image_upload_subparser_group2.add_argument('-p', '--put', metavar='[FILE...]', help='upload images')
+   image_upload_subparser_group2.add_argument('-p', '--put', metavar='[FILE...]', action='append', help='upload image')
    image_upload_subparser_group2.add_argument('-d', '--dir', help='directory\'s images to upload', default='images')
-   image_download_subparser_group1.add_argument('-u', '--upload-from-log-file', help='upload images that are found in log file')
+   image_download_subparser_group1.add_argument('-u', '--upload-from-log-file', action='store_true', help='upload images that are found in log file')
 
 
 def execute_image_cmd(args):
@@ -48,7 +50,7 @@ def execute_image_cmd(args):
       else:
          image_list = []
          
-         with open('images.failed.log', 'r') as fp:
+         with open('logs/images.failed.log', 'r') as fp:
             
             for line in fp:
                json_data = json.loads(line)
@@ -65,8 +67,7 @@ def execute_image_cmd(args):
       
       # get option used ( a single image download )
       if args.put:
-         filename = args.put
-         image_list = [filename]
+         image_list = args.put
          
       # range option used ( range of images download )
       elif args.dir:
@@ -76,7 +77,7 @@ def execute_image_cmd(args):
       else:
          image_list = []
          
-         with open('images.failed.log', 'r') as fp:
+         with open('logs/images.failed.log', 'r') as fp:
             
             for line in fp:
                json_data = json.loads(line)
@@ -85,4 +86,8 @@ def execute_image_cmd(args):
             
       # upload image here
       idu = ImageDownloaderUploader()
-      idu.download_upload_with_progress(image_list, args.url, args.imgcmd)   
+      idu.download_upload_with_progress(image_list, args.url, args.imgcmd)
+   
+   # TODO: fetch roll from the website
+   elif args.roll:
+      print("Getting roll "+args.roll)

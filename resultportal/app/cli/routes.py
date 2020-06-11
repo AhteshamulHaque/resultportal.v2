@@ -44,11 +44,15 @@ class CLIUploadData(Resource):
       conn = current_app.extensions['mysql']
       cursor = conn.cursor()
       
-      # actual saving of data in the database
-      SaveData(args['data_file'], cursor)
-      
-      conn.commit()
-      conn.close()
+      try:
+         # actual saving of data in the database
+         SaveData(args['data_file'], cursor)
+         
+      finally:
+         conn.commit()
+         conn.close()
+         
+      return {'msg': 'Success in uploading data'}
 
 
 # Resource to upload images to gdrive and links to mysql
@@ -56,7 +60,7 @@ class CLIUploadImage(Resource):
    
    def post(self):
       parser = reqparse.RequestParser()
-      parser.add_argument('images', type=FileStorage, action='append', location='files', help='Images to upload', required=True)
+      parser.add_argument('image', type=FileStorage, location='files', help='Image to upload', required=True)
       args = parser.parse_args()
       
       gdrive = current_app.extensions['gdrive']
@@ -64,11 +68,15 @@ class CLIUploadImage(Resource):
       conn = current_app.extensions['mysql']
       cursor = conn.cursor()
       
-      # actual saving of images in gdrive and mysql updating
-      SaveImage(args['images'], gdrive, cursor)
+      try:
+         # actual saving of images in gdrive and mysql updating
+         result = SaveImage(args['image'], gdrive, cursor)
       
-      conn.commit()
-      conn.close()
+      finally:
+         conn.commit()
+         conn.close()
+         
+      return result
 
 
 # Resource to upload pdf to gdrive and link to mysql
@@ -76,7 +84,7 @@ class CLIUploadPDF(Resource):
    
    def post(self):
       parser = reqparse.RequestParser()
-      parser.add_argument('pdfs', type=FileStorage, action='append', location='files', help='Pdfs to upload', required=True)
+      parser.add_argument('pdf', type=FileStorage, location='files', help='Pdf to upload', required=True)
       args = parser.parse_args()
       
       gdrive = current_app.extensions['gdrive']
@@ -84,8 +92,12 @@ class CLIUploadPDF(Resource):
       conn = current_app.extensions['mysql']
       cursor = conn.cursor()
       
-      # actual saving of images in gdrive and mysql updating
-      SaveImage(args['pdfs'], gdrive, cursor)
+      try:
+         # actual saving of images in gdrive and mysql updating
+         result = SavePDF(args['pdf'], gdrive, cursor)
       
-      conn.commit()
-      conn.close()
+      finally:
+         conn.commit()
+         conn.close()
+         
+      return result

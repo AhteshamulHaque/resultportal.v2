@@ -1,0 +1,73 @@
+<nz-card id="chart" nzTitle="Result Stats">
+   <apx-chart
+     [series]="chartOptions.series"
+     [chart]="chartOptions.chart"
+     [xaxis]="chartOptions.xaxis"
+     [stroke]="chartOptions.stroke"
+     [tooltip]="chartOptions.tooltip"
+     [dataLabels]="chartOptions.dataLabels"
+     [legend]="chartOptions.legend"
+     [markers]="chartOptions.markers"
+     [grid]="chartOptions.grid"
+     [yaxis]="chartOptions.yaxis"
+     [title]="chartOptions.title"
+   ></apx-chart>
+ </nz-card>
+
+ <nz-card nzTitle="Predict Results" style="margin: 20px 0">
+
+   <button nz-button nzType="primary" style="margin-bottom: 10px">
+      <i nz-icon nzType="plus"></i>Add Predictors
+   </button>
+
+   <div nz-row [nzGutter]="8">
+
+      <ng-template #deleteTab>
+         <a><img height="20" width="20" src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIj8+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBoZWlnaHQ9IjUxMnB4IiB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgd2lkdGg9IjUxMnB4Ij48cGF0aCBkPSJtNDE2IDUxMmgtMzIwYy01My4wMjM0MzggMC05Ni00Mi45NzY1NjItOTYtOTZ2LTMyMGMwLTUzLjAyMzQzOCA0Mi45NzY1NjItOTYgOTYtOTZoMzIwYzUzLjAyMzQzOCAwIDk2IDQyLjk3NjU2MiA5NiA5NnYzMjBjMCA1My4wMjM0MzgtNDIuOTc2NTYyIDk2LTk2IDk2em0wIDAiIGZpbGw9IiNmZmU2ZTIiLz48ZyBmaWxsPSIjZmM1NzNiIj48cGF0aCBkPSJtMzQyLjczNDM3NSAzMTIuNTc0MjE5LTE0My4zMDg1OTQtMTQzLjMwODU5NGMtNi4yNTc4MTItNi4yNTc4MTMtMTYuMzg2NzE5LTYuMjU3ODEzLTIyLjYyNSAwbC03LjUzNTE1NiA3LjUzNTE1NmMtNi4yNTc4MTMgNi4yNTM5MDctNi4yNTc4MTMgMTYuMzgyODEzIDAgMjIuNjI1bDE0My4zMDg1OTQgMTQzLjMwODU5NGM2LjI1NzgxMiA2LjI1NzgxMyAxNi4zODY3MTkgNi4yNTc4MTMgMjIuNjI1IDBsNy41MzUxNTYtNy41MzUxNTZjNi4yNTc4MTMtNi4yNTM5MDcgNi4yNTc4MTMtMTYuMzgyODEzIDAtMjIuNjI1em0wIDAiLz48cGF0aCBkPSJtMzEyLjU3NDIxOSAxNjkuMjY1NjI1LTE0My4zMDg1OTQgMTQzLjMwODU5NGMtNi4yNTc4MTMgNi4yNTc4MTItNi4yNTc4MTMgMTYuMzg2NzE5IDAgMjIuNjI1bDcuNTM1MTU2IDcuNTM1MTU2YzYuMjUzOTA3IDYuMjU3ODEzIDE2LjM4MjgxMyA2LjI1NzgxMyAyMi42MjUgMGwxNDMuMzA4NTk0LTE0My4zMDg1OTRjNi4yNTc4MTMtNi4yNTc4MTIgNi4yNTc4MTMtMTYuMzg2NzE5IDAtMjIuNjI1bC03LjUzNTE1Ni03LjUzNTE1NmMtNi4yNTM5MDctNi4yNTc4MTMtMTYuMzgyODEzLTYuMjU3ODEzLTIyLjYyNSAwem0wIDAiLz48L2c+PC9zdmc+Cg==" /></a>
+      </ng-template>
+
+      <div nz-col [nzSm]="24" [nzMd]="8">
+        <nz-card nzTitle="Semester 1" style="margin-bottom: 10px" [nzExtra]="">
+         <nz-slider [nzMarks]="marks" nzTooltipVisible="never" [nzMin]="4" [nzStep]="0.1" [nzMax]="10"></nz-slider>
+         SGPA: <span>4.5</span>
+        </nz-card>
+      </div>
+      <div nz-col [nzSm]="24" [nzMd]="8">
+         <nz-card nzTitle="Semester 1" style="margin-bottom: 10px">
+            <nz-slider [nzMarks]="marks" nzTooltipVisible="never" [nzMin]="4" [nzStep]="0.1" [nzMax]="10"></nz-slider>
+            SGPA: <span>4.5</span>
+         </nz-card>
+      </div>
+      <div nz-col [nzSm]="24" [nzMd]="8">
+         <nz-card nzTitle="Semester 1" style="margin-bottom: 10px">
+            <nz-slider [nzMarks]="marks" nzTooltipVisible="never" [nzMin]="4" [nzStep]="0.1" [nzMax]="10"></nz-slider>
+            SGPA: <span>4.5</span>
+         </nz-card>
+      </div>
+
+      <div nz-col [nzSm]="24" [nzMd]="8">
+         <nz-card nzTitle="Semester 1" style="margin-bottom: 10px">
+            <nz-slider [nzMarks]="marks" nzTooltipVisible="never" [nzMin]="4" [nzStep]="0.1" [nzMax]="10"></nz-slider>
+            SGPA: <span>4.5</span>
+         </nz-card>
+      </div>
+
+      <div nz-col [nzSm]="24" [nzMd]="8">
+         <nz-card nzTitle="Semester 1" style="margin-bottom: 10px" [nzExtra]="deleteTab">
+            <nz-slider [nzMarks]="marks" nzTooltipVisible="never" [nzMin]="4" [nzStep]="0.1" [nzMax]="10"></nz-slider>
+            SGPA: <span>4.5</span>
+         </nz-card>
+      </div>
+
+      <div nz-col [nzSm]="24">
+         <p style="text-align: center">
+            <b>7.60<br>
+            CGPA<br>
+            (At the end of 8 semester)</b>
+         </p>
+      </div>
+
+    </div>
+
+ </nz-card>
+ 

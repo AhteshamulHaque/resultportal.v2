@@ -1,0 +1,90 @@
+<div nz-row nzGutter="8">
+   <div nz-col class="gutter-row" [nzSm]="{span: 24}" [nzMd]="{span: 7}" style="text-align: center; margin-bottom: 10px">
+      <nz-card>
+         <nz-avatar 
+            nzSrc="https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png"
+            [nzSize]="100" nzIcon="user" style="margin-bottom: 10px"></nz-avatar>
+            <nz-card-meta nzTitle="{{ name }}" nzDescription="{{ branch }}"></nz-card-meta>
+
+            <nz-statistic
+            [nzValue]="23"
+            [nzTitle]="'Active'"
+            [nzPrefix]="'#'"
+            [nzValueStyle]="{ color: '#3F8600' }"
+          ></nz-statistic>
+       </nz-card>
+   </div>
+
+   <div nz-col class="gutter-row" [nzSm]="{span: 24}" [nzMd]="{span: 17}">
+      <nz-card>
+
+         <nz-collapse [nzBordered]="false">
+            <nz-collapse-panel *ngFor="let panel of panels"
+               [nzExpandedIcon]="'double-right'" [nzHeader]="panel.name"
+               [nzActive]="panel.active" [nzExtra]="documentLink">
+
+               <nz-divider nzDashed></nz-divider>
+
+               <nz-card>
+                <div nz-card-grid [ngStyle]="gridStyle">SGPA: 8.9</div>
+                <div nz-card-grid [ngStyle]="gridStyle">CGPA: 9.0</div>
+                <div nz-card-grid [ngStyle]="gridStyle">Status: <nz-tag [nzColor]="'#f50'">FAIL</nz-tag><nz-tag [nzColor]="'#87d068'">PASS</nz-tag>
+                </div>
+              </nz-card>
+              
+               <nz-table style="margin-top: 20px" #fixedTable nzShowPagination="false" [nzData]="listOfData">
+                <thead>
+                  <tr>
+                    <th nzWidth="50%">Subject Code</th>
+                    <th nzWidth="50%">Subject</th>
+                    <th nzWidth="50%">Test I</th>
+                    <th nzWidth="50%">Test II</th>
+                    <th nzWidth="50%">Assignment</th>
+                    <th nzWidth="50%">Quiz Avg</th>
+                    <th nzWidth="50%">End Sem</th>
+                    <th nzWidth="50%">Total</th>
+                    <th nzWidth="50%">Grade</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of fixedTable.data">
+                    <td>{{ data.code }}</td>
+                    <td>{{ data.subject }}</td>
+                    <td>{{ data.test1 }}</td>
+                    <td>{{ data.test2 }}</td>
+                    <td>{{ data.assignment }}</td>
+                    <td>{{ data.quiz_avg }}</td>
+                    <td>{{ data.end_sem }}</td>
+                    <td>{{ data.total }}</td>
+                    <td>{{ data.grade }}</td>
+                  </tr>
+                </tbody>
+              </nz-table>
+
+            </nz-collapse-panel>
+          </nz-collapse>
+         
+          <ng-template #documentLink>
+            <button (click)="$event.stopPropagation()"
+                  nzType="primary" nzGhost
+                  nz-button nz-dropdown [nzDropdownMenu]="menu"
+                  style="padding-bottom: 6px">
+                  <i nz-icon nzType="more" nzTheme="outline" outlineColor="#52c41a"></i>
+            </button>
+
+            <nz-dropdown-menu #menu="nzDropdownMenu">
+              <ul nz-menu>
+                <li nz-menu-item>
+                  <a href="#">Download</a>
+                </li>
+                <li nz-menu-item>
+                  <a href="#">Print</a>
+                </li>
+              </ul>
+            </nz-dropdown-menu>
+         </ng-template>
+
+       </nz-card>
+   </div>
+
+ </div>

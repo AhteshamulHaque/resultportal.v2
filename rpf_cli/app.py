@@ -47,7 +47,9 @@ def main():
       'verify': execute_verify_cmd
    }
 
+   # Executing the appropriate command
    exe_cmd.get(args.cmd)(args)
+   
    print('\n', '\n', args)
 
 if __name__ == '__main__':

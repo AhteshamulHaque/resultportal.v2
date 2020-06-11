@@ -1,0 +1,102 @@
+<!-- <div nz-row nzGutter="8">
+
+   <nz-card nz-col [nzSpan]="24">
+
+      <nz-page-header [nzGhost]="false">
+         <nz-page-header-title>Filters</nz-page-header-title>
+      </nz-page-header>
+
+      <form nz-form>
+         <div nz-col class="gutter-row" [nzSm]="{span: 24}" [nzMd]="{span: 12}">
+            <nz-form-item>
+               <nz-form-label [nzSpan]="24" nzFor="email"><b>Select Semester</b></nz-form-label>
+               <nz-form-control [nzSpan]="24">
+                  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a semester">
+                     <nz-option nzLabel="Semester 1" nzValue="1"></nz-option>
+                     <nz-option nzLabel="Semester 2" nzValue="2"></nz-option>
+                     <nz-option nzLabel="Semester 3" nzValue="3"></nz-option>
+                   </nz-select>
+               </nz-form-control>
+             </nz-form-item>
+         </div>
+         
+         <div nz-col class="gutter-row" [nzSm]="{span: 24}" [nzMd]="{span: 12}">
+            <nz-form-item>
+               <nz-form-label [nzSpan]="24" nzFor="email"><b>Click To Compare</b></nz-form-label>
+               <button style="margin-top: 3px" nz-button nzType="primary" nzBlock>Compare</button>
+             </nz-form-item>
+         </div>         
+      </form>
+
+   </nz-card>
+
+   <nz-card nz-col nzSpan="24" style="margin-top:20px">
+
+      <nz-page-header [nzGhost]="false">
+         <nz-page-header-title>Semester IV</nz-page-header-title>
+         <nz-page-header-extra>
+           <span>Ranked By: SGPA</span>
+         </nz-page-header-extra>
+      </nz-page-header>
+
+      <nz-table #borderedTable nzSize="small" nzShowPagination="false" nzBordered [nzData]="dataSet">
+         <thead>
+           <tr>
+             <th></th>
+             <th>Name</th>
+             <th>Registration ID</th>
+           </tr>
+         </thead>
+         <tbody>
+           <tr *ngFor="let data of borderedTable.data">
+             <td nzShowCheckbox></td>
+             <td>
+               <nz-avatar 
+                  nzShape="square"
+                  [nzSize]="100"
+                  nzIcon="user"
+                  [nzSrc]="data.src"></nz-avatar>
+                 {{ data.name }}
+             </td>
+             <td>{{ data.roll }}</td>
+           </tr>
+         </tbody>
+       </nz-table>
+
+   </nz-card>
+
+</div> -->
+
+<nz-alert nzType="info" nzMessage="Semester V"></nz-alert>
+
+<nz-card style="margin: 10px 0">
+
+   <div nzType="flex" nzJustify="space-around" nzAlign="middle">
+      <div nz-col nzSpan="8">
+        <nz-avatar [nzSize]="64" [nzSrc]="dataSet[0].src"></nz-avatar>
+      </div>
+      <div nz-col nzSpan="8" style="text-align: center">
+         <b style="line-height: 4em">Comparision</b>
+       </div>
+      <div nz-col nzSpan="8" style="text-align: right">
+        <nz-avatar [nzSize]="64" [nzSrc]="dataSet[1].src"></nz-avatar>
+      </div>
+   </div>
+
+   <nz-divider [nzDashed]="true" style="position: relative; top: 10px"></nz-divider>
+
+   <apx-chart
+     [series]="chartOptions.series"
+     [chart]="chartOptions.chart"
+     [xaxis]="chartOptions.xaxis"
+     [stroke]="chartOptions.stroke"
+     [tooltip]="chartOptions.tooltip"
+     [dataLabels]="chartOptions.dataLabels"
+     [legend]="chartOptions.legend"
+     [markers]="chartOptions.markers"
+     [grid]="chartOptions.grid"
+     [yaxis]="chartOptions.yaxis"
+     [title]="chartOptions.title"
+   ></apx-chart>
+ </nz-card>
+ 

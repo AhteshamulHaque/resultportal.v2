@@ -1,0 +1,23 @@
+<nz-card nzTitle="Ranking (Batch 2016)">
+
+   <nz-collapse [nzBordered]="false" nzAccordion>
+      <nz-collapse-panel *ngFor="let panel of panels" [nzHeader]="panel.name" [nzActive]="panel.active">
+
+         <ul
+         nz-list
+         [nzDataSource]="panel.branch"
+         nzSize="small"
+         [nzRenderItem]="largeItem"
+         >
+         <ng-template #largeItem let-item>
+           <li nz-list-item nzNoFlex>
+               <a [routerLink]="[item.course, item.branchInitials]">{{ item.branchName }}</a>
+           </li>
+         </ng-template>
+   
+       </ul>
+
+      </nz-collapse-panel>
+    </nz-collapse>
+
+</nz-card>

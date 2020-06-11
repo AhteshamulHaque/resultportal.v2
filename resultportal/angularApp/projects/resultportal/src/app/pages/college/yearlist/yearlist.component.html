@@ -1,0 +1,21 @@
+<nz-card>
+   <ul
+      nz-list
+      [nzDataSource]="data"
+      nzBordered
+      nzSize="large"
+      [nzHeader]="batch"
+      [nzRenderItem]="largeItem"
+      >
+      <ng-template #largeItem let-item>
+        <li nz-list-item nzNoFlex>
+            <a [routerLink]="[item]">{{ item }}</a>
+        </li>
+      </ng-template>
+
+      <ng-template #batch>
+         <b>Batches</b>
+      </ng-template>
+
+    </ul>
+</nz-card>

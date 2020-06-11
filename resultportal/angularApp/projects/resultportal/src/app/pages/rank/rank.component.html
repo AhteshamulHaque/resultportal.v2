@@ -1,0 +1,73 @@
+<div nz-row nzGutter="8">
+
+   <nz-card nz-col [nzSpan]="24">
+
+      <nz-page-header [nzGhost]="false">
+         <nz-page-header-title>Filters</nz-page-header-title>
+      </nz-page-header>
+
+      <form nz-form>
+         <div nz-col class="gutter-row" [nzSm]="{span: 24}" [nzMd]="{span: 12}">
+            <nz-form-item>
+               <nz-form-label [nzSpan]="24" nzFor="email"><b>Select Semester</b></nz-form-label>
+               <nz-form-control [nzSpan]="24">
+                  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a semester">
+                     <nz-option nzLabel="Semester 1" nzValue="1"></nz-option>
+                     <nz-option nzLabel="Semester 2" nzValue="2"></nz-option>
+                     <nz-option nzLabel="Semester 3" nzValue="3"></nz-option>
+                   </nz-select>
+               </nz-form-control>
+             </nz-form-item>
+         </div>
+         
+         <div nz-col class="gutter-row" [nzSm]="{span: 24}" [nzMd]="{span: 12}">
+            <nz-form-item>
+               <nz-form-label [nzSpan]="24" nzFor="email"><b>Choose Ranking Method</b></nz-form-label>
+               <nz-form-control [nzSpan]="24">
+                  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a method">
+                     <nz-option nzLabel="CGPA" nzValue="sgpa"></nz-option>
+                     <nz-option nzLabel="SGPA" nzValue="cgpa"></nz-option>
+                   </nz-select>
+               </nz-form-control>
+             </nz-form-item>
+         </div>         
+      </form>
+
+   </nz-card>
+
+   <nz-card nz-col nzSpan="24" style="margin-top:20px">
+
+      <nz-page-header [nzGhost]="false">
+         <nz-page-header-title>Semester IV</nz-page-header-title>
+         <nz-page-header-extra>
+           <span>Ranked By: SGPA</span>
+         </nz-page-header-extra>
+      </nz-page-header>
+
+      <nz-table #borderedTable nzSize="small" nzShowPagination="false" nzBordered [nzData]="dataSet">
+         <thead>
+           <tr>
+             <th>Rank</th>
+             <th>Name</th>
+             <th>CGPA</th>
+           </tr>
+         </thead>
+         <tbody>
+           <tr *ngFor="let data of borderedTable.data">
+             <td>#{{ data.rank }}</td>
+             <td>
+               <nz-avatar 
+                  nzShape="square"
+                  [nzSize]="64"
+                  nzIcon="user"
+                  [nzSrc]="data.src"></nz-avatar>
+                 {{ data.name }} ({{ data.roll }})
+             </td>
+             <td>{{ data.cgpa }}</td>
+           </tr>
+         </tbody>
+       </nz-table>
+
+   </nz-card>
+
+</div>

@@ -1,0 +1,34 @@
+<nz-card nz-col nzSpan="24" style="margin-top:20px">
+
+   <nz-page-header [nzGhost]="false">
+      <nz-page-header-title>Semester IV</nz-page-header-title>
+      <nz-page-header-extra>
+        <span>Ranked By: SGPA</span>
+      </nz-page-header-extra>
+   </nz-page-header>
+
+   <nz-table #borderedTable nzSize="small" nzShowPagination="false" nzBordered [nzData]="dataSet">
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Name</th>
+          <th>CGPA</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of borderedTable.data">
+          <td>#{{ data.rank }}</td>
+          <td>
+            <nz-avatar 
+               nzShape="square"
+               [nzSize]="64"
+               nzIcon="user"
+               [nzSrc]="data.src"></nz-avatar>
+              {{ data.name }} ({{ data.roll }})
+          </td>
+          <td>{{ data.cgpa }}</td>
+        </tr>
+      </tbody>
+    </nz-table>
+
+</nz-card>
