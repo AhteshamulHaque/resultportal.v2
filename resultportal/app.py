@@ -32,8 +32,12 @@ def create_app():
       with open('token.pickle', 'rb') as token:
          creds = pickle.load(token)
 
-   gdrive = build('drive', 'v3', credentials=creds)
-   app.extensions['gdrive'] = gdrive
+   try:
+      gdrive = build('drive', 'v3', credentials=creds)
+      app.extensions['gdrive'] = gdrive
+   except Exception as error:
+      print(error)
+      
    
    # register mysql extension
    mysql = MySQL()

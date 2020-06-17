@@ -55,18 +55,20 @@ class ImageDownloaderUploader:
                   self.download_image( str(img_info), url) # image_info is an id
                
                # log the download success
-               sp.write(Fore.GREEN+"[ SUCCESS ] "+Style.RESET_ALL+"STUDENT ID --- {img_info}".format(img_info=img_info))
+               sp.write(Fore.GREEN+"[ SUCCESS ] "+Style.RESET_ALL+"--- {img_info}".format(img_info=img_info))
                
             except Exception as error:
                # log the error on stdout
-               sp.write(Fore.RED+f"[ FAILED - {error.__class__.__name__} ] "+Style.RESET_ALL+"STUDENT ID --- {img_info}".format(img_info=img_info))
-               # log the error in a file in json format
+               sp.write(Fore.RED+f"[ FAILED - {error.__class__.__name__} ] "+Style.RESET_ALL+"--- {img_info}".format(img_info=img_info))
                
+               # log the error in a file in json format
                if op_type == 'upload':
-                  fp.write(json.dumps({'img_info': img_info, 'type': 'upload', 'error': traceback.format_exc()})+'\n')
+                  fp.write( json.dumps({"img_info": img_info, "type": "upload", "error": traceback.format_exc()}) )
+                  fp.write('\n')
                   
                elif op_type == 'download':
-                  fp.write(json.dumps({'img_info': img_info, 'type': 'download', 'error': traceback.format_exc()})+'\n')
+                  fp.write(json.dumps({"img_info": img_info, "type": "download", "error": traceback.format_exc()}) )
+                  fp.write('\n')
                   
       # The below line updates the progress to 100% which is not done
       # in the last step of the previous for loop
@@ -102,6 +104,8 @@ class ImageDownloaderUploader:
       
    def upload_image(self, img_path, url):
       
+      resp = None
       with open(img_path, 'rb') as fp:
-         resp = requests.post(url, {'images': fp})
+         resp = requests.post(url, files={'image': fp})
          resp.raise_for_status()
+      

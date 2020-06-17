@@ -41,13 +41,16 @@ class CLIUploadData(Resource):
       parser.add_argument('data_file', type=FileStorage, location='files', help='Result data to upload', required=True)
       args = parser.parse_args()
       
-      conn = current_app.extensions['mysql']
+      conn = current_app.extensions['mysql'].connect()
       cursor = conn.cursor()
       
+      # Note -> No need to catch exception. Exceptions are caught by
+      # the global logger
+            
       try:
          # actual saving of data in the database
          SaveData(args['data_file'], cursor)
-         
+
       finally:
          conn.commit()
          conn.close()
@@ -65,7 +68,7 @@ class CLIUploadImage(Resource):
       
       gdrive = current_app.extensions['gdrive']
       
-      conn = current_app.extensions['mysql']
+      conn = current_app.extensions['mysql'].connect()
       cursor = conn.cursor()
       
       try:
@@ -89,7 +92,7 @@ class CLIUploadPDF(Resource):
       
       gdrive = current_app.extensions['gdrive']
       
-      conn = current_app.extensions['mysql']
+      conn = current_app.extensions['mysql'].connect()
       cursor = conn.cursor()
       
       try:

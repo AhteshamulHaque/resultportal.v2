@@ -26,8 +26,8 @@ def register_image_parser(subparsers):
    # mutually exclusive argument for upload subparser
    image_upload_subparser_group2 = image_upload_subparser.add_mutually_exclusive_group(required=True)   
    image_upload_subparser_group2.add_argument('-p', '--put', metavar='[FILE...]', action='append', help='upload image')
-   image_upload_subparser_group2.add_argument('-d', '--dir', help='directory\'s images to upload', default='images')
-   image_download_subparser_group1.add_argument('-u', '--upload-from-log-file', action='store_true', help='upload images that are found in log file')
+   image_upload_subparser_group2.add_argument('-d', '--dir', help='directory\'s images to upload')
+   image_upload_subparser_group2.add_argument('-u', '--upload-from-log-file', action='store_true', help='upload images that are found in log file')
 
 
 def execute_image_cmd(args):
@@ -65,18 +65,18 @@ def execute_image_cmd(args):
    # upload command is called
    elif args.imgcmd == 'upload':
       
-      # get option used ( a single image download )
+      # get option used ( a single image upload )
       if args.put:
          image_list = args.put
          
-      # range option used ( range of images download )
+      # directory option used ( upload images from a directory )
       elif args.dir:
          image_list = [ os.path.join(args.dir, file) for file in os.listdir(args.dir) ]
       
-      # file option used ( download using log file )
+      # file option used ( upload using log file )
       else:
          image_list = []
-         
+
          with open('logs/images.failed.log', 'r') as fp:
             
             for line in fp:

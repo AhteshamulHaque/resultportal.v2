@@ -22,5 +22,5 @@ def download_pdf(pdf_id, url):
 def upload_pdf(pdf_path, url):
    
    with open(pdf_path, 'rb') as fp:
-      resp = requests.post(url, {'images': fp})
+      resp = requests.post(url, files={'pdf': fp})
       resp.raise_for_status()
