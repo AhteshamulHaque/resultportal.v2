@@ -3,7 +3,7 @@ from flask import Flask, g
 from flaskext.mysql import MySQL
 from flask_restful import Api
 from flask_jwt_extended import JWTManager
-from util.logger import WebLogger
+from logger import WebLogger
 from flask_cors import CORS
 import sentry_sdk
 from sentry_sdk.integrations.flask import FlaskIntegration

@@ -38,6 +38,12 @@ class TestingConfig(Config):
    
    # testing secret key
    SECRET_KEY = 'some-random-testing-secret-key'
+   
+   # app api key -> this is for security purpose so that
+   # if anyone learns the route and their associated variables
+   # they will not be able to manipulate it without the key
+   API_KEY = 'a-super-random-api-key'
+  
 
 # Production configuration
 class ProductionConfig(Config):

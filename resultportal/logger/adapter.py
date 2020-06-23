@@ -24,10 +24,8 @@ class RequestResponseAdapter:
       except:
          return 'anonymous'
 
-   def get_http_header(self, header_name, default=None):
-      if header_name in request.headers:
-         return request.headers.get(header_name)
-      return default
+   def get_http_headers(self):
+      return dict(request.headers)
 
    def get_protocol(self):
       return request.environ.get('SERVER_PROTOCOL')
@@ -51,16 +49,28 @@ class RequestResponseAdapter:
       return "{:.2f} ms".format( (time()-g.request_time)*1000 )
    
    def get_request_data(self):
-      data = {}
+      request_data = {}
       
-      # find data in json
-      if request.json:
-         data['json'] = request.json
-      # find data in form
-      if request.form:
-         data['form'] = request.form
+      if request.args.to_dict():
+         request_data['data'] = request.args.to_dict()
          
-      return data
+      if request.form.to_dict():
+         request_data['form'] = request.form.to_dict()
+         
+      if request.get_json():
+         request_data['json'] = request.get_json()
+         
+      file_data = {}
+      for key, value in request.files.items():
+         file_data[key] = value.filename
+         
+      if file_data:
+         request_data['files'] = file_data
+         
+      if not request_data:
+         return None
+      
+      return request_data
       
    def get_status_code(self, error):
       # All error are expected to be HTTP errors only
