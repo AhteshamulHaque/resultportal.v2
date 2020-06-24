@@ -4,25 +4,16 @@ import argparse
 # import program subcommands and their associated arguments and logic
 # to execute when they are called
 # these are function names to register with the program
-from commands import (
-      # subcommands options and arguments
-      register_config_parser, register_student_parser, register_log_parser,
-      register_image_parser, register_pdf_parser, register_rank_parser,
-      register_scraper_parser, register_verify_parser,
-      
-      # subcommands logic to execute
-      execute_config_cmd, execute_student_cmd, execute_log_cmd,
-      execute_image_cmd, execute_pdf_cmd, execute_rank_cmd,
-      execute_scrape_cmd, execute_verify_cmd
-   )
+
+from commands import *
 
 def main():
-   # Defines rpf metadata such as description, usage, etc
+   # define rpf metadata such as description, usage, etc
    parser = argparse.ArgumentParser(
             prog='rpf',
-            description='CLI program for managing result portal'
+            description='CLI program for managing result portal and feedback'
          )
-   parser.add_argument('-v', '--verbose', help='Detailed output of the operations')
+   parser.add_argument('-v', '--verbose', help='detailed output of the operations')
 
    # add all the subparsers to the main program
    subparsers = parser.add_subparsers(dest='cmd', help='sub-commands', required=True)
@@ -48,7 +39,7 @@ def main():
    }
 
    # Executing the appropriate command
-   exe_cmd.get(args.cmd)(args)
+   exe_cmd[args.cmd](args)
    
    print('\n', '\n', args)
 

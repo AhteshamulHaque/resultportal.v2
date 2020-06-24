@@ -32,14 +32,10 @@ class StudentResultDownloader:
          "btnimgShow.y": str(random.randint(1, 99)),
          "ddlSemester": "0",
          "hfldno": "",
-         "hdfidno": "",
-         "request_no": "1" # for testing
+         "hdfidno": ""
       }
       
       resp = requests.post(url, post_data)
-      
-      # for testing
-      del post_data['request_no']
       
       data = resp.text
 

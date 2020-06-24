@@ -1,4 +1,4 @@
-from commands.image.helpers import ImageDownloaderUploader
+from commands.image.helpers import ImageTranfer
 import os, time, json
 
 def register_image_parser(subparsers):
@@ -58,8 +58,8 @@ def execute_image_cmd(args):
                   image_list.append( json_data['img_info'] )
             
       # download image here
-      idu = ImageDownloaderUploader()
-      idu.download_upload_with_progress(image_list, args.url, args.imgcmd)   
+      idu = ImageTranfer()
+      idu.transfer_with_progress(image_list, args.url, args.imgcmd)   
 
             
    # upload command is called
@@ -85,8 +85,8 @@ def execute_image_cmd(args):
                   image_list.append( json_data['img_info'] )
             
       # upload image here
-      idu = ImageDownloaderUploader()
-      idu.download_upload_with_progress(image_list, args.url, args.imgcmd)
+      idu = ImageTranfer()
+      idu.transfer_with_progress(image_list, args.url, args.imgcmd)
    
    # TODO: fetch roll from the website
    elif args.roll:

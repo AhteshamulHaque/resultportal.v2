@@ -5,12 +5,12 @@ from yaspin import yaspin
 from colorama import init, Fore, Back, Style
 from string import Template
 
-class ImageDownloaderUploader:
+class ImageTranfer:
    
    def __init__(self):
        self.image_dir  = 'images'
    
-   def download_upload_with_progress(self, image_list, url, op_type):
+   def transfer_with_progress(self, image_list, url, op_type):
       
       '''
          image_list -> list of images to upload ( list of ids ) or download( list of filepath or filename)
@@ -104,7 +104,6 @@ class ImageDownloaderUploader:
       
    def upload_image(self, img_path, url):
       
-      resp = None
       with open(img_path, 'rb') as fp:
          resp = requests.post(url, files={'image': fp})
          resp.raise_for_status()

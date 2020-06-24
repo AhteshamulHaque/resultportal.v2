@@ -26,8 +26,7 @@ CREATE TABLE IF NOT EXISTS subjects (
 
 -- All the database suffixed as 2015, 2016, etc are year wise student database
 -- these database are created on the basis of a json file submitted after scraping
--- of data from the original website
--- below is a sample of such database
+-- of data from the original website. Below is a sample of such database
 CREATE DATABASE IF NOT EXISTS nilekrator$2015;
 use nilekrator$2015;
 
