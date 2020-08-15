@@ -17,7 +17,7 @@ from googleapiclient.http import MediaIoBaseUpload
 
 def create_app():
    app = Flask(__name__)
-   app.config.from_object(dict_config['dev'])
+   app.config.from_object(dict_config['prod'])
 
    # make the app an api
    api = Api(app)
@@ -27,6 +27,7 @@ def create_app():
    
    # register driver extension
    creds = None
+   
    # Always pass a valid token for the gdrive api
    if os.path.exists('token.pickle'):
       with open('token.pickle', 'rb') as token:

@@ -35,13 +35,13 @@ CREATE TABLE IF NOT EXISTS metadata (
   branch_name varchar(20) PRIMARY KEY,
   session_date varchar(15),
   publish_date varchar(10),
-  semesters varchar(10),
+  semesters varchar(25),
   scheme varchar(10),
   degree varchar(15)
 );
 
 -- semester student status
-CREATE TABLE IF NOT EXISTS nilekrator$2015_ug_cs_5 (
+CREATE TABLE IF NOT EXISTS nilekrator$2015.ug_cs_5 (
   roll varchar(20) PRIMARY KEY,
   cgpa float(5, 2),
   sgpa float(5, 2),
